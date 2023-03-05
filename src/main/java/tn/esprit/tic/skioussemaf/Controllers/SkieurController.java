@@ -37,12 +37,19 @@ public class SkieurController {
     public void removeSkieur(@PathVariable Long numSkieur) {
         iSkieurService.removeSkieur(numSkieur);
     }
-    @PutMapping("/{numSkieur}/{numPiste}")
-    public Skieur assignSkierToPiste(@PathVariable Long numSkieur, @PathVariable Long numPiste){
+    @PutMapping("/assignSkierToPiste/{numSkieur}/{numPiste}")
+    public Skieur assignSkierToPiste(@PathVariable long numSkieur, @PathVariable long numPiste){
         return iSkieurService.assignSkierToPiste(numSkieur, numPiste);
     }
     @PutMapping("/{numSkieur}/{numAbon}")
     public Skieur AssignSkierToSubscription(long numSkieur, long numAbon){
         return iSkieurService.AssignSkierToSubscription(numSkieur, numAbon);
     }
+    @PutMapping("{numSkieur}/{numInscription}")
+
+    public Skieur AssignSkierToInscription(@PathVariable long numSkieur, @PathVariable long numInscription) {
+
+        return iSkieurService.assignSkierToInscription(numSkieur, numInscription);
+    }
 }
+

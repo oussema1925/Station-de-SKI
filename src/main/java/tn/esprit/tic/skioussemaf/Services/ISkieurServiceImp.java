@@ -1,11 +1,15 @@
 package tn.esprit.tic.skioussemaf.Services;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import tn.esprit.tic.skioussemaf.Repositories.AbonnementRepository;
+import tn.esprit.tic.skioussemaf.Repositories.InscriptionRepository;
 import tn.esprit.tic.skioussemaf.Repositories.PisteRepository;
 import tn.esprit.tic.skioussemaf.Repositories.SkieurRepository;
 import tn.esprit.tic.skioussemaf.entities.Abonnement;
+import tn.esprit.tic.skioussemaf.entities.Inscription;
 import tn.esprit.tic.skioussemaf.entities.Piste;
 import tn.esprit.tic.skioussemaf.entities.Skieur;
 
@@ -20,6 +24,8 @@ public class ISkieurServiceImp implements ISkieurService{
     PisteRepository pisteRepository;
     @Autowired
     AbonnementRepository abonnementRepository;
+    @Autowired
+    InscriptionRepository inscriptionRepository;
     @Override
     public List<Skieur> retrieveAllSkieurs() {
         return skieurRepository.findAll();
@@ -46,12 +52,14 @@ public class ISkieurServiceImp implements ISkieurService{
     }
 
         @Override
-        public Skieur assignSkierToPiste(Long numSkieur, Long numPiste) {
+        public Skieur assignSkierToPiste(long numSkieur, long numPiste) {
         //RECUPERATION ID
             Skieur skieur=skieurRepository.findById(numSkieur).orElse(null) ;
+            Assert.notNull(skieur,"skieur not found!!!");
             Piste piste=pisteRepository.findById(numPiste).orElse(null);
+            Assert.notNull(piste,"piste not found!!!");
             //verrificationnon null
-            if(skieur!=null && piste!=null){
+//            if(skieur!=null && piste!=null){
             //traitement
             // skieur.getPistes().add(piste);
             List<Piste>pistes=skieur.getPistes();
@@ -60,15 +68,17 @@ public class ISkieurServiceImp implements ISkieurService{
             return  skieurRepository.save(skieur);
 
             }
-            return null;
-        }
+//            return null;
+//        }
         @Override
         public Skieur AssignSkierToSubscription(long numSkieur, long numAbon) {
         //RECUPERATION ID
             Skieur skieur=skieurRepository.findById(numSkieur).orElse(null) ;
+            Assert.notNull(skieur,"skieur not found!!!");
             Abonnement abonnement=abonnementRepository.findById(numAbon).orElse(null);
+            Assert.notNull(abonnement,"abonnement not found!!!");
             //verrificationnon null
-            if(skieur!=null && abonnement!=null){
+//            if(skieur!=null && abonnement!=null){
             //traitement
             // skieur.getPistes().add(piste);
 
@@ -77,6 +87,24 @@ public class ISkieurServiceImp implements ISkieurService{
             return  skieurRepository.save(skieur);
 
         }
-        return null;}
+//        return null;}
 
-}
+    @Override
+    public Skieur assignSkierToInscription(long numSkieur, long numInscription) {
+        Skieur skieur=skieurRepository.findById(numSkieur).orElse(null) ;
+        Inscription inscription=inscriptionRepository.findById(numInscription).orElse(null);
+        //verrificationnon null
+        if(skieur!=null && inscription!=null){
+            //traitement
+            // skieur.getPistes().add(piste);
+            List<Inscription>inscriptions=skieur.getInscriptions();
+            inscriptions.add(inscription);
+            skieur.setInscriptions(inscriptions);
+            return  skieurRepository.save(skieur);
+
+        }
+        return null;    }
+    }
+
+
+

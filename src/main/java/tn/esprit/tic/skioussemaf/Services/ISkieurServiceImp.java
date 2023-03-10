@@ -1,6 +1,5 @@
 package tn.esprit.tic.skioussemaf.Services;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -8,10 +7,7 @@ import tn.esprit.tic.skioussemaf.Repositories.AbonnementRepository;
 import tn.esprit.tic.skioussemaf.Repositories.InscriptionRepository;
 import tn.esprit.tic.skioussemaf.Repositories.PisteRepository;
 import tn.esprit.tic.skioussemaf.Repositories.SkieurRepository;
-import tn.esprit.tic.skioussemaf.entities.Abonnement;
-import tn.esprit.tic.skioussemaf.entities.Inscription;
-import tn.esprit.tic.skioussemaf.entities.Piste;
-import tn.esprit.tic.skioussemaf.entities.Skieur;
+import tn.esprit.tic.skioussemaf.entities.*;
 
 import java.util.List;
 
@@ -104,6 +100,24 @@ public class ISkieurServiceImp implements ISkieurService{
 
         }
         return null;    }
+
+    @Override
+    public List<Skieur> retrieveSkiersBySubscriptionType(TypeAbonnement typeAbonnement) {
+        return skieurRepository.findSkieurByAbonnement_TypeAbon(typeAbonnement);
+    }
+//    @Override
+//    public List<Skieur> retrieveSkiersBySubscriptionType(TypeAbonnement typeAbonnement){
+//        List<Skieur> skieurs = new ArrayList<>();
+//        for (Skieur skieur : skieurRepository.findAll()) {
+//            for (Abonnement abonnement : skieur.getAbonnement()){
+//                if (abonnement.getTypeAbon() == typeAbonnement) {
+//                    skieurs.add(skieur);
+//                    break; // arrêter la recherche si un abonnement correspond
+//                }
+//            }
+//        }
+//        return skieurs;
+//    }
     }
 
 

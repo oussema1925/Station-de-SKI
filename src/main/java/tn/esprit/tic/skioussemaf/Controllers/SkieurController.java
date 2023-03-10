@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import tn.esprit.tic.skioussemaf.Services.ISkieurService;
 import tn.esprit.tic.skioussemaf.Services.ISkieurServiceImp;
 import tn.esprit.tic.skioussemaf.entities.Skieur;
+import tn.esprit.tic.skioussemaf.entities.TypeAbonnement;
 
 import java.util.List;
 import java.util.Optional;
@@ -51,5 +52,10 @@ public class SkieurController {
 
         return iSkieurService.assignSkierToInscription(numSkieur, numInscription);
     }
+    @GetMapping("getSkieurParTypeAbon/{tp}")
+    public List<Skieur> getSkieurParTypeAbon(@PathVariable TypeAbonnement typeAbonnement){
+        return  iSkieurService.retrieveSkiersBySubscriptionType(typeAbonnement);
+    }
+
 }
 

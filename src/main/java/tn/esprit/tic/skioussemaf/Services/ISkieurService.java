@@ -1,6 +1,7 @@
 package tn.esprit.tic.skioussemaf.Services;
 
 import tn.esprit.tic.skioussemaf.entities.Skieur;
+import tn.esprit.tic.skioussemaf.entities.TypeAbonnement;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface ISkieurService {
     Skieur assignSkierToPiste(long numSkieur, long numPiste);
     Skieur AssignSkierToSubscription(long numSkieur, long numAbon);
     Skieur assignSkierToInscription(long numSkieur, long numInscription);
+   List<Skieur> retrieveSkiersBySubscriptionType(TypeAbonnement typeAbonnement);
 }

@@ -21,6 +21,5 @@ public class Abonnement {
     private float prixAbon;
     @Enumerated(EnumType.STRING)
     private TypeAbonnement typeAbon;
-    @OneToOne
-    private Skieur skieur;
+
 }

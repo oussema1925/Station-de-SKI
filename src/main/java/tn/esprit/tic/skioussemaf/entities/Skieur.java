@@ -9,6 +9,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -23,11 +25,11 @@ public class Skieur {
     private LocalDate dateNaissance;
     private String ville;
     @OneToMany(mappedBy = "skieur")
-    private List<Inscription> inscriptions;
+    private Set<Inscription> inscriptions;
     @ManyToMany(mappedBy = "skieurs")
     @JsonIgnore
-    private List<Piste> pistes;
-    @OneToOne(mappedBy = "skieur", cascade = CascadeType.REMOVE)
+    private Set<Piste> pistes;
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JsonIgnore
     private Abonnement abonnement;
 }

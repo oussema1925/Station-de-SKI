@@ -52,7 +52,7 @@ public class SkieurController {
 
         return iSkieurService.assignSkierToInscription(numSkieur, numInscription);
     }
-    @GetMapping("getSkieurParTypeAbon/{tp}")
+    @GetMapping("getSkieurParTypeAbon/{typeAbonnement}")
     public List<Skieur> getSkieurParTypeAbon(@PathVariable TypeAbonnement typeAbonnement){
         return  iSkieurService.retrieveSkiersBySubscriptionType(typeAbonnement);
     }

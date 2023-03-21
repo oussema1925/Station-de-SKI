@@ -10,6 +10,7 @@ import tn.esprit.tic.skioussemaf.Repositories.SkieurRepository;
 import tn.esprit.tic.skioussemaf.entities.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ISkieurServiceImp implements ISkieurService{
@@ -58,7 +59,7 @@ public class ISkieurServiceImp implements ISkieurService{
 //            if(skieur!=null && piste!=null){
             //traitement
             // skieur.getPistes().add(piste);
-            List<Piste>pistes=skieur.getPistes();
+            Set<Piste>pistes=skieur.getPistes();
             pistes.add(piste);
             skieur.setPistes(pistes);
             return  skieurRepository.save(skieur);
@@ -93,7 +94,7 @@ public class ISkieurServiceImp implements ISkieurService{
         if(skieur!=null && inscription!=null){
             //traitement
             // skieur.getPistes().add(piste);
-            List<Inscription>inscriptions=skieur.getInscriptions();
+            Set<Inscription> inscriptions=skieur.getInscriptions();
             inscriptions.add(inscription);
             skieur.setInscriptions(inscriptions);
             return  skieurRepository.save(skieur);
@@ -105,19 +106,6 @@ public class ISkieurServiceImp implements ISkieurService{
     public List<Skieur> retrieveSkiersBySubscriptionType(TypeAbonnement typeAbonnement) {
         return skieurRepository.findSkieurByAbonnement_TypeAbon(typeAbonnement);
     }
-//    @Override
-//    public List<Skieur> retrieveSkiersBySubscriptionType(TypeAbonnement typeAbonnement){
-//        List<Skieur> skieurs = new ArrayList<>();
-//        for (Skieur skieur : skieurRepository.findAll()) {
-//            for (Abonnement abonnement : skieur.getAbonnement()){
-//                if (abonnement.getTypeAbon() == typeAbonnement) {
-//                    skieurs.add(skieur);
-//                    break; // arrêter la recherche si un abonnement correspond
-//                }
-//            }
-//        }
-//        return skieurs;
-//    }
     }
 
 

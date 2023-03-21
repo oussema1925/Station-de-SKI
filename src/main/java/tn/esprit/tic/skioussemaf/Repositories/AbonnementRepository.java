@@ -9,8 +9,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface AbonnementRepository extends JpaRepository<Abonnement,Long > {
-    List<Abonnement> findByTypeAbonnement(TypeAbonnement typeAbonnement);
-    List<Abonnement> findAbonnementByStartDateAndEndDate(LocalDate startDate, LocalDate endDate);
+    List<Abonnement> findByTypeAbonOrderByDateDebut(TypeAbonnement typeAbonnement);
+    List<Abonnement> findAbonnementByDateDebutAndDateFin(LocalDate startDate, LocalDate endDate);
 }
 
 

@@ -9,5 +9,4 @@ public class SkiOussemaFApplication {
     public static void main(String[] args) {
         SpringApplication.run(SkiOussemaFApplication.class, args);
     }
-
 }

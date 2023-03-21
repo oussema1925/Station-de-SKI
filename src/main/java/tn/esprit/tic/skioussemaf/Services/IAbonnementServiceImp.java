@@ -41,12 +41,10 @@ public class IAbonnementServiceImp implements IAbonnementService{
 
     @Override
     public List<Abonnement> getSubscriptionByType(TypeAbonnement type) {
-        return abonnementRepository.findByTypeAbonnement(type);
+        return abonnementRepository.findByTypeAbonOrderByDateDebut(type);
     }
-
-
     @Override
     public List<Abonnement> retrieveSubscriptionsByDates(LocalDate startDate, LocalDate endDate) {
-        return  abonnementRepository.findAbonnementByStartDateAndEndDate(startDate,endDate);
+        return  abonnementRepository.findAbonnementByDateDebutAndDateFin(startDate,endDate);
     }
 }

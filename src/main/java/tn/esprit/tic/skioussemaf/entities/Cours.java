@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -26,5 +28,5 @@ public class Cours {
     @Transient   //ma todhhorch fel base de données
     private int nomProf;
     @OneToMany(mappedBy = "cours")
-    private List<Inscription> inscriptions;
+    private Set<Inscription> inscriptions;
 }

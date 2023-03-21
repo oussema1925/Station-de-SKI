@@ -48,12 +48,12 @@ public class AbonnementController {
         return  iAbonnementService.updateAbonnement(abonnement);
 
     }
-    @GetMapping("abParType/{tp}")
+    @GetMapping("getAbonnementParType/{typeAbonnement}")
     public List<Abonnement> getAbonnementParType(@PathVariable TypeAbonnement typeAbonnement){
         return  iAbonnementService.getSubscriptionByType(typeAbonnement);
     }
 
-    @GetMapping("abParDate/{dateDebut}/{dateFin}")
+    @GetMapping("getAbonnementParDate/{startDate}/{endDate}")
     public List<Abonnement>getAbonnementParDate (@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate, @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate){
         return  iAbonnementService.retrieveSubscriptionsByDates(startDate,endDate);
     }

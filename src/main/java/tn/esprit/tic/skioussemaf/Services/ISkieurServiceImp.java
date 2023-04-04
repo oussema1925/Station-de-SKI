@@ -1,5 +1,6 @@
 package tn.esprit.tic.skioussemaf.Services;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -13,16 +14,12 @@ import java.util.List;
 import java.util.Set;
 
 @Service
+@RequiredArgsConstructor
 public class ISkieurServiceImp implements ISkieurService{
-
-   @Autowired
-    SkieurRepository skieurRepository;
-   @Autowired
-    PisteRepository pisteRepository;
-    @Autowired
-    AbonnementRepository abonnementRepository;
-    @Autowired
-    InscriptionRepository inscriptionRepository;
+    private final SkieurRepository skieurRepository;
+    private final PisteRepository pisteRepository;
+    private final AbonnementRepository abonnementRepository;
+    private final InscriptionRepository inscriptionRepository;
     @Override
     public List<Skieur> retrieveAllSkieurs() {
         return skieurRepository.findAll();
@@ -106,7 +103,12 @@ public class ISkieurServiceImp implements ISkieurService{
     public List<Skieur> retrieveSkiersBySubscriptionType(TypeAbonnement typeAbonnement) {
         return skieurRepository.findSkieurByAbonnement_TypeAbon(typeAbonnement);
     }
+
+    @Override
+    public List<Skieur> findByInscriptionsCoursTypeCoursAndInscriptionsCoursSupportAndPistesCouleur(TypeCours inscriptions_cours_typeCours, Support inscriptions_cours_support, Couleur pistes_couleur) {
+        return skieurRepository.findByInscriptionsCoursTypeCoursAndInscriptionsCoursSupportAndPistesCouleur(inscriptions_cours_typeCours, inscriptions_cours_support, pistes_couleur);
     }
+}
 
 
 

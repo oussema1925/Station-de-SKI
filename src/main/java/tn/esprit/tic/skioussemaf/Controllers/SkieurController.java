@@ -4,8 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.tic.skioussemaf.Services.ISkieurService;
 import tn.esprit.tic.skioussemaf.Services.ISkieurServiceImp;
-import tn.esprit.tic.skioussemaf.entities.Skieur;
-import tn.esprit.tic.skioussemaf.entities.TypeAbonnement;
+import tn.esprit.tic.skioussemaf.entities.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -56,6 +55,11 @@ public class SkieurController {
     public List<Skieur> getSkieurParTypeAbon(@PathVariable TypeAbonnement typeAbonnement){
         return  iSkieurService.retrieveSkiersBySubscriptionType(typeAbonnement);
     }
+    @GetMapping("getby/{inscriptions_cours_typeCours}/{inscriptions_cours_support}/{pistes_couleur}")
+    public List<Skieur> findByInscriptionsCoursTypeCoursAndInscriptionsCoursSupportAndPistesCouleur(TypeCours inscriptions_cours_typeCours, Support inscriptions_cours_support, Couleur pistes_couleur){
+        return iSkieurService.findByInscriptionsCoursTypeCoursAndInscriptionsCoursSupportAndPistesCouleur(inscriptions_cours_typeCours, inscriptions_cours_support, pistes_couleur);
+    }
+
 
 }
 

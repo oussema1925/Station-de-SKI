@@ -1,5 +1,6 @@
 package tn.esprit.tic.skioussemaf.Services;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.tic.skioussemaf.entities.Moniteur;
@@ -9,11 +10,11 @@ import tn.esprit.tic.skioussemaf.Repositories.PisteRepository;
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class IMoniteurServiceImp implements IMoniteurService{
 
-    @Autowired
-    MoniteurRepository moniteurRepository;
+    private final MoniteurRepository moniteurRepository;
     @Override
     public List<Moniteur> retrieveAllMoniteurs() {
         return moniteurRepository.findAll();

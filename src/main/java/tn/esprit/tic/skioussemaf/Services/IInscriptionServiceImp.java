@@ -1,5 +1,6 @@
 package tn.esprit.tic.skioussemaf.Services;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.tic.skioussemaf.entities.Inscription;
@@ -7,11 +8,10 @@ import tn.esprit.tic.skioussemaf.Repositories.InscriptionRepository;
 
 import java.util.List;
 import java.util.Optional;
+@RequiredArgsConstructor
 @Service
 public class IInscriptionServiceImp implements IInscriptionService{
-
-    @Autowired
-    InscriptionRepository inscriptionRepository;
+    private final InscriptionRepository inscriptionRepository;
     @Override
     public List<Inscription> retrieveAllInscription() {
         return inscriptionRepository.findAll();

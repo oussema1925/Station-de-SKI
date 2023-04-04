@@ -1,5 +1,6 @@
 package tn.esprit.tic.skioussemaf.Services;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.tic.skioussemaf.entities.Abonnement;
@@ -9,11 +10,10 @@ import tn.esprit.tic.skioussemaf.entities.TypeAbonnement;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+@RequiredArgsConstructor
 @Service
 public class IAbonnementServiceImp implements IAbonnementService{
-
-    @Autowired
-    AbonnementRepository abonnementRepository;
+    private final AbonnementRepository abonnementRepository;
     @Override
     public List<Abonnement> retrieveAllAbonnement() {
         return abonnementRepository.findAll();

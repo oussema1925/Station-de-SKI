@@ -30,6 +30,5 @@ public class Skieur {
     @JsonIgnore
     private Set<Piste> pistes;
     @OneToOne(cascade = CascadeType.REMOVE)
-    @JsonIgnore
     private Abonnement abonnement;
 }

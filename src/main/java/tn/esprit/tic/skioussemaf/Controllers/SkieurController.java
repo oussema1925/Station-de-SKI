@@ -1,6 +1,8 @@
 package tn.esprit.tic.skioussemaf.Controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.tic.skioussemaf.Services.ISkieurService;
 import tn.esprit.tic.skioussemaf.Services.ISkieurServiceImp;
@@ -9,6 +11,7 @@ import tn.esprit.tic.skioussemaf.entities.*;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @RestController
 @RequestMapping("/skieur")
 public class SkieurController {
@@ -58,6 +61,16 @@ public class SkieurController {
     @GetMapping("getby/{inscriptions_cours_typeCours}/{inscriptions_cours_support}/{pistes_couleur}")
     public List<Skieur> findByInscriptionsCoursTypeCoursAndInscriptionsCoursSupportAndPistesCouleur(TypeCours inscriptions_cours_typeCours, Support inscriptions_cours_support, Couleur pistes_couleur){
         return iSkieurService.findByInscriptionsCoursTypeCoursAndInscriptionsCoursSupportAndPistesCouleur(inscriptions_cours_typeCours, inscriptions_cours_support, pistes_couleur);
+    }
+    @GetMapping("find/{support}/{nom}")
+    public List<Skieur> findByMoniteurNameAndSupportTypeJPQL(@PathVariable("support") Support support, @PathVariable("nom") String nom)
+    {
+        log.info(""+support);
+        return iSkieurService.findByMoniteurNameAndSupportTypeJPQL(support, nom);
+    }
+    @PostMapping("addSkierAndAssignToCourse")
+    Skieur addSkierAndAssignToCourse(@RequestBody Skieur skieur){
+        return iSkieurService.addSkierAndAssignToCourse(skieur);
     }
 
 

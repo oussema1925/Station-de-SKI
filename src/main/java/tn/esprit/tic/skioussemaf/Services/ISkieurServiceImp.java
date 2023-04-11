@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import tn.esprit.tic.skioussemaf.Repositories.AbonnementRepository;
-import tn.esprit.tic.skioussemaf.Repositories.InscriptionRepository;
-import tn.esprit.tic.skioussemaf.Repositories.PisteRepository;
-import tn.esprit.tic.skioussemaf.Repositories.SkieurRepository;
+import tn.esprit.tic.skioussemaf.Repositories.*;
 import tn.esprit.tic.skioussemaf.entities.*;
 
 import java.util.List;
@@ -20,6 +17,8 @@ public class ISkieurServiceImp implements ISkieurService{
     private final PisteRepository pisteRepository;
     private final AbonnementRepository abonnementRepository;
     private final InscriptionRepository inscriptionRepository;
+    private final CoursRepository coursRepository;
+
     @Override
     public List<Skieur> retrieveAllSkieurs() {
         return skieurRepository.findAll();
@@ -107,6 +106,29 @@ public class ISkieurServiceImp implements ISkieurService{
     @Override
     public List<Skieur> findByInscriptionsCoursTypeCoursAndInscriptionsCoursSupportAndPistesCouleur(TypeCours inscriptions_cours_typeCours, Support inscriptions_cours_support, Couleur pistes_couleur) {
         return skieurRepository.findByInscriptionsCoursTypeCoursAndInscriptionsCoursSupportAndPistesCouleur(inscriptions_cours_typeCours, inscriptions_cours_support, pistes_couleur);
+    }
+
+    @Override
+    public List<Skieur> findByMoniteurNameAndSupportTypeJPQL(Support support, String nom) {
+        return skieurRepository.findByMoniteurNameAndSupportTypeJPQL(support,nom);
+    }
+
+    @Override
+    public Skieur addSkierAndAssignToCourse(Skieur skieur) {
+        Assert.notNull(skieur.getAbonnement(),"Abonnement must be entered!!!");
+        Assert.notNull(skieur.getInscriptions(),"Inscription must be entered!!!!");
+        Set<Inscription> inscriptions=skieur.getInscriptions();
+        inscriptions.forEach(inscription -> {
+            Assert.notNull(inscription.getCours().getNumCours(),"Cours must be entered!!!");
+            Cours cours= coursRepository.findById(inscription.getCours().getNumCours()).orElse(null);
+            Assert.notNull(cours,"No cours found with this id!!!");
+            inscription.setCours(cours);
+            skieurRepository.saveAndFlush(skieur);
+            inscription.setSkieur(skieur);
+            inscriptionRepository.save(inscription);
+            //taw ki bech ntastiw , exception handler
+        });
+        return skieur;
     }
 }
 

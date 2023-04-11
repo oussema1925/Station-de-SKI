@@ -12,6 +12,7 @@ public interface CoursRepository extends JpaRepository<Cours,Long > {
             "FROM cours c" +
             "ORDER BY (SELECT COUNT * FROM inscription i WHERE i.cours_num_cours = c.num_cours)", nativeQuery = true)
     List<Cours> getAllOrderByInscriptionNumberSQL();
+
     @Query(value = "SELECT c FROM Cours c ORDER BY c.inscriptions.size")
     List<Cours> getAllOrderByInscriptionNumberJPQL();
 

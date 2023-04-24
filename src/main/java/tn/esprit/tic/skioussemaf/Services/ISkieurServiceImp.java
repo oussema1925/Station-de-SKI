@@ -115,18 +115,20 @@ public class ISkieurServiceImp implements ISkieurService{
 
     @Override
     public Skieur addSkierAndAssignToCourse(Skieur skieur) {
-        Assert.notNull(skieur.getAbonnement(),"Abonnement must be entered!!!");
+        Assert.notNull(skieur.getAbonnement(),"Abonnement must be entered!!!"); //vérifier si l'objet abonn existe
         Assert.notNull(skieur.getInscriptions(),"Inscription must be entered!!!!");
         Set<Inscription> inscriptions=skieur.getInscriptions();
-        inscriptions.forEach(inscription -> {
+        inscriptions.forEach(inscription -> {   //nparcouri liste taa inscrip w netfaked ken kol inscri aandha cours
             Assert.notNull(inscription.getCours().getNumCours(),"Cours must be entered!!!");
             Cours cours= coursRepository.findById(inscription.getCours().getNumCours()).orElse(null);
             Assert.notNull(cours,"No cours found with this id!!!");
-            inscription.setCours(cours);
-            skieurRepository.saveAndFlush(skieur);
-            inscription.setSkieur(skieur);
-            inscriptionRepository.save(inscription);
-            //taw ki bech ntastiw , exception handler
+            inscription.setCours(cours); //inscription aandou cours barka donc l inscrip houa li bech ygéri l relation et il va affecter inscrip lel cours
+            //taw ki bech ntestiw , exception handler
+        });
+        skieurRepository.saveAndFlush(skieur); //ken bech nhotha dekhel l for mch bech ysajel les controles de saisie donc nhotha l bara w naawed naamel for lel skieur
+        skieur.getInscriptions().forEach(inscription ->{
+                inscription.setSkieur(skieur);
+                inscriptionRepository.saveAndFlush(inscription);
         });
         return skieur;
     }

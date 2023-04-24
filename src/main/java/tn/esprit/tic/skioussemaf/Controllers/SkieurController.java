@@ -59,7 +59,7 @@ public class SkieurController {
         return  iSkieurService.retrieveSkiersBySubscriptionType(typeAbonnement);
     }
     @GetMapping("getby/{inscriptions_cours_typeCours}/{inscriptions_cours_support}/{pistes_couleur}")
-    public List<Skieur> findByInscriptionsCoursTypeCoursAndInscriptionsCoursSupportAndPistesCouleur(TypeCours inscriptions_cours_typeCours, Support inscriptions_cours_support, Couleur pistes_couleur){
+    public List<Skieur> findByInscriptionsCoursTypeCoursAndInscriptionsCoursSupportAndPistesCouleur(@PathVariable("inscriptions_cours_typeCours") TypeCours inscriptions_cours_typeCours,@PathVariable("inscriptions_cours_support") Support inscriptions_cours_support,@PathVariable("pistes_couleur") Couleur pistes_couleur){
         return iSkieurService.findByInscriptionsCoursTypeCoursAndInscriptionsCoursSupportAndPistesCouleur(inscriptions_cours_typeCours, inscriptions_cours_support, pistes_couleur);
     }
     @GetMapping("find/{support}/{nom}")

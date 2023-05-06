@@ -5,4 +5,5 @@ import tn.esprit.tic.skioussemaf.entities.Piste;
 import tn.esprit.tic.skioussemaf.entities.Skieur;
 
 public interface PisteRepository extends JpaRepository<Piste,Long > {
+
 }

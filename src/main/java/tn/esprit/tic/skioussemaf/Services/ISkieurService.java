@@ -11,7 +11,6 @@ public interface ISkieurService {
     Skieur updateSkieur(Skieur skieur);
     void removeSkieur (Long numSkieur);
     Skieur retrieveSkieur (Long numSkieur);
-
     Skieur assignSkierToPiste(long numSkieur, long numPiste);
     Skieur AssignSkierToSubscription(long numSkieur, long numAbon);
     Skieur assignSkierToInscription(long numSkieur, long numInscription);
@@ -19,4 +18,5 @@ public interface ISkieurService {
    List<Skieur> findByInscriptionsCoursTypeCoursAndInscriptionsCoursSupportAndPistesCouleur(TypeCours inscriptions_cours_typeCours, Support inscriptions_cours_support, Couleur pistes_couleur);
    List<Skieur> findByMoniteurNameAndSupportTypeJPQL(@Param("support") Support support, @Param("nom") String nom);
     Skieur addSkierAndAssignToCourse(Skieur skieur);
+    List<Skieur> findSkieursByPisteCouleur(Couleur couleur);
 }

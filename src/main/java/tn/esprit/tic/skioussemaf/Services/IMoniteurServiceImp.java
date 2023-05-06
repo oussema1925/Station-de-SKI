@@ -45,8 +45,8 @@ public class IMoniteurServiceImp implements IMoniteurService{
         moniteurRepository.deleteById(numMoniteur);
     }
 
-    @Scheduled(fixedDelay = 60000)
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedDelay = 60000) //kol dkika w tarteh
+    @Scheduled(fixedRate = 60000) //aala baadhou men ghir rahaa
     @Scheduled(cron = "0 0 0 * * MON-FRI")
     @Override
     public void test() {

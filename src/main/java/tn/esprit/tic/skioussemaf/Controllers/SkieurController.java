@@ -73,6 +73,10 @@ public class SkieurController {
         return iSkieurService.addSkierAndAssignToCourse(skieur);
     }
 
+    @GetMapping("fi/{couleur}")
+    public List<Skieur> findSkieursByPisteCouleur(@PathVariable("couleur") Couleur couleur) {
+        return iSkieurService.findSkieursByPisteCouleur(couleur);
+    }
 
 }
 

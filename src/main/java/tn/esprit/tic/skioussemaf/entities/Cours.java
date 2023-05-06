@@ -15,7 +15,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cours extends BaseEntity{
+public class Cours{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long numCours;

@@ -44,6 +44,7 @@ public class ISkieurServiceImp implements ISkieurService{
         return skieurRepository.findById(numSkieur).orElse(null);
     }
 
+    // When many to many
         @Override
         public Skieur assignSkierToPiste(long numSkieur, long numPiste) {
         //RECUPERATION ID
@@ -63,6 +64,8 @@ public class ISkieurServiceImp implements ISkieurService{
             }
 //            return null;
 //        }
+
+    // When one to one
         @Override
         public Skieur AssignSkierToSubscription(long numSkieur, long numAbon) {
         //RECUPERATION ID
@@ -75,18 +78,19 @@ public class ISkieurServiceImp implements ISkieurService{
             //traitement
             // skieur.getPistes().add(piste);
 
-            skieur.setAbonnement(abonnement);
+            skieur.setAbonnement(abonnement); //o2o
 
             return  skieurRepository.save(skieur);
 
         }
 //        return null;}
 
+    //when one to many
     @Override
     public Skieur assignSkierToInscription(long numSkieur, long numInscription) {
         Skieur skieur=skieurRepository.findById(numSkieur).orElse(null) ;
         Inscription inscription=inscriptionRepository.findById(numInscription).orElse(null);
-        //verrificationnon null
+        //verrification non null
         if(skieur!=null && inscription!=null){
             //traitement
             // skieur.getPistes().add(piste);
@@ -112,7 +116,6 @@ public class ISkieurServiceImp implements ISkieurService{
     public List<Skieur> findByMoniteurNameAndSupportTypeJPQL(Support support, String nom) {
         return skieurRepository.findByMoniteurNameAndSupportTypeJPQL(support,nom);
     }
-
     @Override
     public Skieur addSkierAndAssignToCourse(Skieur skieur) {
         Assert.notNull(skieur.getAbonnement(),"Abonnement must be entered!!!"); //vérifier si l'objet abonn existe
@@ -132,6 +135,12 @@ public class ISkieurServiceImp implements ISkieurService{
         });
         return skieur;
     }
+
+    @Override
+    public List<Skieur> findSkieursByPisteCouleur(Couleur couleur) {
+        return skieurRepository.findSkieursByPisteCouleur(couleur);
+    }
+
 }
 
 
